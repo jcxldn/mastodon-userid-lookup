@@ -1,0 +1,23 @@
+{
+  "name": "mastodon-userid-lookup",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Prouser123/mastodon-userid-lookup.git"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/Prouser123/mastodon-userid-lookup/issues"
+  },
+  "homepage": "https://github.com/Prouser123/mastodon-userid-lookup#readme",
+  "dependencies": {
+    "fast-xml-parser": "^3.18.0",
+    "node-fetch": "^2.6.1"
+  }
+}
