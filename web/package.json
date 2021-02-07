@@ -1,4 +1,5 @@
 {
+  "name": "mastodon-userid-lookup-web",
   "scripts": {
       "build": "webpack --config webpack.config.js --mode production --display-modules"
   },
