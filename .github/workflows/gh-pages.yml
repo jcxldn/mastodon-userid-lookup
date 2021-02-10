@@ -1,0 +1,32 @@
+name: gh-pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 15.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 15.x
+    - name: Install dependencies
+      run: npm install --ignore-scripts
+    - name: Install dependencies (web)
+      run: cd web && npm install --ignore-scripts
+    - name: Build browser page (web)
+      run: cd web && npm run build
+    - name: Deploy browser page
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GIT_CONFIG_NAME: "mastodon-userid-lookup"
+          GIT_CONFIG_EMAIL: ${{ secrets.ACCESS_EMAIL }}
+          BRANCH: gh-pages
+          FOLDER: "web/build"
+          #CNAME: (cname)
+          CLEAN: true
