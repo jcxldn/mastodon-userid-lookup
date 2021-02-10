@@ -1,9 +1,10 @@
-import lookup from "../index"
+import lookup from "../api/index"
+import UsernameLookupError from "../api/errors/UsernameLookupError"
+import UsernameValidationError from "../api/errors/UsernameValidationError"
+
 import "bootstrap"
 import "bootstrap/dist/css/bootstrap.min.css";
 import jQuery from "jquery"
-
-const mastodonFullRegex = /^(@)[a-z0-9_]+([a-z0-9_\.]+[a-z0-9_]+)?(@)([a-z0-9_]+([a-z0-9_\.]+[a-z0-9_]+))(.)([a-z0-9_]+([a-z0-9_\.]+[a-z0-9_]+))/i;
 
 jQuery(() => {
   jQuery("form").on("submit", e => {
@@ -24,16 +25,13 @@ const validate = () => {
 
   const username = jQuery("#username").val();
 
-  const isValid = mastodonFullRegex.test(username);
-
-  if (isValid) {
-    lookup(username).then(uid => {
-        jQuery(".res").html(`User found!<br> Your ID is <b>${uid}</b>.</br>`);
-    }).catch(err => {
-        console.error(err)
-        jQuery(".res").html("User or domain not found. Please try again.");
-    })
-  } else {
-    jQuery(".res").html("Invalid username.");
-  }
+  lookup(username).then(uid => {
+    jQuery(".res").html(`User found!<br> Your ID is <b>${uid}</b>.</br>`);
+  }).catch(err => {
+    jQuery(".res").html(
+      err instanceof UsernameValidationError ? "Invalid username." :
+        err instanceof UsernameLookupError ? "Username could not be resolved. Please try again." :
+          "User or domain not found. Please try again."
+    )
+  })
 }
