@@ -21,12 +21,12 @@ jobs:
     - name: Build browser page (web)
       run: cd web && npm run build
     - name: Deploy browser page
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          GIT_CONFIG_NAME: "mastodon-userid-lookup"
-          GIT_CONFIG_EMAIL: ${{ secrets.ACCESS_EMAIL }}
-          BRANCH: gh-pages
-          FOLDER: "web/build"
-          #CNAME: (cname)
-          CLEAN: true
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      with:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        GIT_CONFIG_NAME: "mastodon-userid-lookup"
+        GIT_CONFIG_EMAIL: ${{ secrets.ACCESS_EMAIL }}
+        BRANCH: gh-pages
+        FOLDER: "web/build"
+        #CNAME: (cname)
+        CLEAN: true
